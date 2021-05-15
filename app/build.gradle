@@ -45,4 +45,10 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    // material dialogs
+    def matieral_dialogs_version = "3.3.0"
+    implementation "com.afollestad.material-dialogs:core:$matieral_dialogs_version"
 }
+
+

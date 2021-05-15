@@ -1,5 +1,6 @@
 package com.example.shoppingliststartcodekotlin.data
 
+import android.view.View
 import androidx.lifecycle.MutableLiveData
 
 object Repository {
@@ -16,9 +17,77 @@ object Repository {
         return productListener
     }
 
-    fun createTestData()
+
+
+
+
+
+
+  
+
+    fun createTestData() // Only runs if there are no items in the the freezer.
     {
-        //add some products to the products list - for testing purposes
+        products.add(
+                Product(
+                    "kylling",
+                    "2stk",
+                        )
+
+        )
+        products.add(
+                Product(
+                    "Rarbaber",
+                    "800g",
+                )
+
+        )
+        products.add(
+                Product(
+                    "Lakseside",
+                    "800g",
+                )
+
+        )
+        products.add(
+                Product(
+                    "Isterninger",
+                    "1 pose",
+                )
+
+        )
+
+        products.add(
+                Product(
+                    "kylling",
+                    "2stk",
+                )
+
+        )
+        products.add(
+                Product(
+                    "Rarbaber",
+                    "800g",
+                )
+
+        )
+        products.add(
+                Product(
+                    "Lakseside",
+                    "800g",
+                )
+
+        )
+        products.add(
+                Product(
+                    "'Isterninger",
+                    "1 pose",
+                )
+
+        )
+
+
     }
+
+
 
 }
