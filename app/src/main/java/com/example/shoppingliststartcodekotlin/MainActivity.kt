@@ -52,14 +52,11 @@ class MainActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
-    }
-
-
-    /* Menu End*/
+    }/* Menu End*/
 
     /* Creates a predefined alarm, to remember to remove items
      from freezer the night before */
-    fun createAlarm(message: String, hour: Int, minutes: Int) {
+    private fun createAlarm(message: String, hour: Int, minutes: Int) {
         val intent = Intent(AlarmClock.ACTION_SET_ALARM).apply {
             putExtra(AlarmClock.EXTRA_MESSAGE, message)
             putExtra(AlarmClock.EXTRA_HOUR, hour)

@@ -69,6 +69,11 @@ class ProductAdapter(var products: MutableList<Product>) :
             itemQty = itemView.findViewById(R.id.item_qty)
 
 
+            itemView.setOnClickListener {
+                val position: Int = adapterPosition
+                Toast.makeText(itemView.context, "Click me, now do something", Toast.LENGTH_LONG).show()
+            }
+
         }
 
     }
