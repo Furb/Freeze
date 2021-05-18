@@ -34,13 +34,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        btnAddToFreezer.setOnClickListener{
-            var freeze_item = findViewById<EditText>(R.id.input_freeze_item).text.toString()
-            var item_qty = findViewById<EditText>(R.id.input_freeze_qty).text.toString()
-            val newProduct = Product(freeze_item, item_qty)
 
-            Repository.products.add(newProduct)
-            updateUI()
+        btnAddToFreezer.setOnClickListener{
+            val freeze_item = findViewById<EditText>(R.id.input_freeze_item).text.toString()
+            val item_qty = findViewById<EditText>(R.id.input_freeze_qty).text.toString()
+            val product = Product(freeze_item, item_qty)
+
+            Repository.addProduct(product).observe(this, Observer {
+                Log.d("Products", "Found ${it.size} products")
+                updateUI()
+
+            })
         }
 
         Repository.getData().observe(this, Observer {
@@ -63,7 +67,11 @@ class MainActivity : AppCompatActivity() {
             R.id.alarm -> {
                 createAlarm("Remove from freezer", 21, 30)
             }
-            R.id.clear_all -> Toast.makeText(this, "Delete all", Toast.LENGTH_SHORT).show()
+            R.id.clear_all -> {
+                Repository.products.clear()
+                adapter?.notifyDataSetChanged()
+                Toast.makeText(this, "Delete all", Toast.LENGTH_SHORT).show()
+            }
             else -> {
             }
         }
@@ -169,6 +177,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+
     fun updateUI() {
         val layoutManager = LinearLayoutManager(this)
 
@@ -184,7 +193,6 @@ class MainActivity : AppCompatActivity() {
        recyclerView.adapter = adapter
 
     }
-
 
 
 }
