@@ -19,11 +19,20 @@ object Repository {
 
 
 
+    fun addProduct(product: Product): MutableLiveData<MutableList<Product>> {
+        productListener.value = products
+        products.add(product)
+
+        return productListener
+    }
 
 
+    fun deleteProduct(index: Int): MutableLiveData<MutableList<Product>> {
+        products.removeAt(index)
+        productListener.value = products
+        return productListener
+    }
 
-
-  
 
     fun createTestData() // Only runs if there are no items in the the freezer.
     {
@@ -86,8 +95,8 @@ object Repository {
         )
 
 
-    }
+    }  // End test data
 
 
 
-}
+}  //End object repository

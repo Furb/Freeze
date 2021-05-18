@@ -9,11 +9,11 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/days45"
+        android:id="@+id/btnAddToFreezer"
         android:layout_width="153dp"
-        android:layout_height="80dp"
+        android:layout_height="72dp"
         android:background="@drawable/cat_buttons"
-        android:text="+45 days"
+        android:text="add"
         android:textSize="14sp"
         app:backgroundTint="@null"
         app:layout_constraintEnd_toStartOf="@+id/days120"
@@ -24,11 +24,11 @@
 
 
     <Button
-        android:id="@+id/days120"
+        android:id="@+id/filter"
         android:layout_width="153dp"
-        android:layout_height="80dp"
+        android:layout_height="72dp"
         android:background="@drawable/cat_buttons"
-        android:text="+120 days"
+        android:text="filter"
         android:textSize="14sp"
         app:backgroundTint="@null"
         app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
@@ -36,19 +36,6 @@
         app:layout_constraintStart_toEndOf="@+id/days45"
         app:layout_constraintTop_toTopOf="@id/guidelineTop" />
 
-    <Button
-        android:id="@+id/daysNew"
-        android:layout_width="153dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/cat_buttons"
-        android:text="New"
-        android:textSize="14sp"
-        app:backgroundTint="@null"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/days45"
-        app:layout_constraintTop_toBottomOf="@id/days120" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -59,20 +46,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/daysNew" />
+        app:layout_constraintTop_toBottomOf="@id/btnAddToFreezer" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btnAddToFreezer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:contentDescription="Add item to freezer"
-        android:foreground="@drawable/ic_baseline_add_24"
-        app:backgroundTint="#E515A5"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
-        app:layout_constraintTop_toBottomOf="@id/recyclerView"
-        android:focusable="true" />
+
 
 
 

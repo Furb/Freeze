@@ -8,5 +8,3 @@ data class Product(
 
 
 }
-
-
