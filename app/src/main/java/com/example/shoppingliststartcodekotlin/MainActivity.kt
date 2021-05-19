@@ -11,6 +11,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
@@ -20,6 +21,7 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.example.shoppingliststartcodekotlin.adapters.ProductAdapter
 import com.example.shoppingliststartcodekotlin.data.Product
 import com.example.shoppingliststartcodekotlin.data.Repository
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -52,7 +54,7 @@ class MainActivity : AppCompatActivity() {
             updateUI()
         })
 
-        DialogButtons()
+        dialogButtons()
     }
 
     /* Menu begin*/
@@ -68,9 +70,7 @@ class MainActivity : AppCompatActivity() {
                 createAlarm("Remove from freezer", 21, 30)
             }
             R.id.clear_all -> {
-                Repository.products.clear()
-                adapter?.notifyDataSetChanged()
-                Toast.makeText(this, "Delete all", Toast.LENGTH_SHORT).show()
+                deleteAllDialog()
             }
             else -> {
             }
@@ -79,7 +79,15 @@ class MainActivity : AppCompatActivity() {
     }/* Menu End*/
 
 /**/
-    private fun DialogButtons() {
+
+
+
+    /*
+    ******** Dialogs **********
+    */
+
+
+    private fun dialogButtons() {
 
 
         filter.setOnClickListener {
@@ -88,33 +96,28 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-
-        /*
-        clear_all.setOnClickListener {
-
-            val areYouSureCallback = object: AreYouSureCallback {
-                override fun proceed() {
-                   displayToast("Everything is now defrosted")
-                }
-
-                override fun cancel() {
-                    displayToast("Everything is kept in the freezer")
-                }
-            }
-
-            areYouSureDialog(
-                    "Do you want to remove everything from the freezer? It will all defrosted",
-                    areYouSureCallback
-            )
-
-        }
-
-         */
-
     }
 
+    private fun deleteAllDialog() {
 
-    /*dialogs*/
+        val areYouSureCallback = object: AreYouSureCallback {
+            override fun proceed() {
+                Repository.products.clear()
+                adapter?.notifyDataSetChanged()
+                displayToast("Everything is now defrosted")
+            }
+
+            override fun cancel() {
+                displayToast("Everything is kept in the freezer")
+            }
+        }
+
+        areYouSureDialog(
+            "Do you want to remove all items from the freezer? Everything will defrost",
+            areYouSureCallback
+        )
+
+    }
 
     fun displayToast(message: String?) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
@@ -136,6 +139,15 @@ class MainActivity : AppCompatActivity() {
                     message(text = message)
                     positiveButton (R.string.text_ok)
                 }
+    }
+
+    fun editProductDialog(message: String?) {
+        MaterialDialog(this)
+            .show{
+                title(R.string.text_success)
+                message(text = message)
+                positiveButton (R.string.text_ok)
+            }
     }
 
 
@@ -161,6 +173,13 @@ class MainActivity : AppCompatActivity() {
         fun cancel()
 
     }
+    /*
+     - End dialogs
+    */
+
+
+
+
 
     /* Creates a preset alarm, to remember to remove items
   from freezer the night before */

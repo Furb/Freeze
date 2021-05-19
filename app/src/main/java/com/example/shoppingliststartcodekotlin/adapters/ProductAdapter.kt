@@ -12,6 +12,7 @@ import com.example.shoppingliststartcodekotlin.R
 import com.example.shoppingliststartcodekotlin.data.Product
 import com.example.shoppingliststartcodekotlin.data.Repository
 import com.example.shoppingliststartcodekotlin.data.Repository.products
+import com.google.android.material.snackbar.Snackbar
 
 
 class ProductAdapter(var products: MutableList<Product>) :
@@ -44,23 +45,39 @@ class ProductAdapter(var products: MutableList<Product>) :
         var itemStatus: ImageView
         var freezeItem: TextView
         var itemQty: TextView
+        var deleteItem: ImageView
 
         init {
             itemStatus = itemView.findViewById(R.id.status_image)
             freezeItem = itemView.findViewById(R.id.freeze_item)
             itemQty = itemView.findViewById(R.id.item_qty)
+            deleteItem = itemView.findViewById(R.id.btn_Delete_Item)
 
 
-            //Click on individual freeze item. Should open dialog
+            //Click on individual freeze item. Should open an edit dialog
             itemView.setOnClickListener {
 
                 Toast.makeText(
-                        itemView.context,
-                        "Click me, now do something",
-                        Toast.LENGTH_SHORT).show()
+                    itemView.context,
+                    "Should go to Edit dialog",
+                    Toast.LENGTH_SHORT
+                ).show()
+
+                 deleteItem.setOnClickListener {
+
+                    val position: Int = adapterPosition
+                    Repository.deleteProduct(position)
+                    notifyItemRemoved(position)
+                     Snackbar.make( itemView, "Remove this item from the freezer", Snackbar.LENGTH_LONG ).setAction("Undo", null).show()
+
+
+                }
+
             }
 
+
         }
+
 
     }
 }
